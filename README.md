@@ -1,52 +1,59 @@
-# Matteo Passeri - Operations & AI Implementation Portfolio
+# Matteo Passeri - Operations Systems Portfolio
 
-Operations Specialist & AI Implementation Lead - 10 years across logistics, procurement, ERP transition, and operational systems in industrial SMEs, now operating at the intersection of process design and applied AI.
+Sanitized case studies for operations systems, CRM workflows, ERP transition, quote-to-cash visibility, n8n automation, and AI-assisted implementation.
 
-I design and run operating systems for small service businesses: lead lifecycle, qualification workflows, quote-to-cash visibility, CRM-backed handoff, alerting, and AI-assisted automation. Currently operating 31 self-hosted n8n workflows on Oracle Cloud across lead qualification, email triage, job screening, outreach, intelligence feeds, and alerts.
+I build practical operating systems for small teams: lead intake, qualification workflows, quoting, pipeline visibility, reporting, alerting, SOPs, and handoff documentation.
 
-Open to RevOps, AI Automation, and Implementation Specialist roles - full-remote EU or hybrid with relocation support.
+The real source repositories remain private to protect client data, business logic, workflow exports, credentials, endpoints, and operational details. This repository is the public proof layer: outcomes, architecture summaries, and sanitized case studies.
 
-The repositories behind these systems are private to protect client data, business logic, and operational details. This portfolio shows sanitized case studies, outcomes, and architecture summaries. **Live walkthroughs and demos are provided on call.**
+Open to **full-remote EU roles** in Operations, Implementation, CRM / Workflow Automation, Marketing Ops, Growth Ops-adjacent work, and AI Workflow operations.
 
 ## Focus Areas
 
 - Lead lifecycle management: intake, qualification, scoring, routing
-- Marketing-to-sales handoff: deterministic checks, LLM-assisted classification, CRM storage
-- Quote-to-cash visibility: client tracking, quoting, work logs, delivery, P&L
-- Operational alerting and fallback paths
-- n8n automation, Notion CRM, Calendly, Telegram, email
-- Pipeline reporting and dashboards
+- CRM-style handoff: structured fields, alerts, status tracking, fallback paths
+- Quote-to-cash visibility: clients, quotes, work logs, delivery, P&L
+- ERP transition and process standardization
+- n8n automation and operational alerting
+- Pipeline reporting and dashboard foundations
+- SQL fundamentals and data hygiene
 - Documentation, SOPs, and operational handoff
 
 ## Selected Systems
 
 ### AI-Assisted Lead Qualification & Booking Funnel
 
-A live consulting site connected to a private lead lifecycle workflow. The system replaces a typical "contact form into nowhere" flow with a documented operational pipeline: form intake, deterministic pre-checks, LLM-assisted scoring and brief generation, CRM storage, Calendly event handling, Telegram alerts, email fallbacks, and explicit handoff logic.
-
-Built to demonstrate that a marketing site can connect to a real operating system instead of stopping at a contact form.
+A live consulting site connected to a private lead lifecycle workflow. The system replaces a typical "contact form into nowhere" flow with a documented operating pipeline: form intake, deterministic pre-checks, LLM-assisted scoring and brief generation, CRM storage, Calendly event handling, Telegram alerts, email fallbacks, and handoff logic.
 
 Public site: https://aienabledops.it
 
-Case study: `case-studies/ai-enabled-ops-funnel.md`
+Case study: [case-studies/ai-enabled-ops-funnel.md](case-studies/ai-enabled-ops-funnel.md)
 
-### Custom 3D Printing ERP / Manager Pro
+### ME3Design ERP / Manager Pro
 
-A private ERP-style operations platform built for an Italian custom 3D printing studio. Covers the full quote-to-cash loop: client and project management, quote and estimate support, work log tracking, delivery and archive workflow, P&L visibility, analytics dashboard, lead webhooks, and AI-assisted estimation.
+A private ERP-style operations platform built for a custom 3D printing workflow. It covers clients, projects, quoting, estimate support, work logs, delivery and archive workflow, P&L visibility, analytics, lead webhooks, and AI-assisted estimation.
 
-Operating outcome: quote turnaround reduced from about 25 minutes to under 2 minutes, with end-to-end pipeline visibility from lead to delivery.
+Operating outcome: quote turnaround reduced from about 25 minutes to under 2 minutes.
 
-Case study: `case-studies/custom-3d-printing-erp.md`
+Case study: [case-studies/custom-3d-printing-erp.md](case-studies/custom-3d-printing-erp.md)
+
+### Self-Hosted n8n Automation Layer
+
+An Oracle Cloud automation layer running active workflows for lead qualification, email triage, job screening, outreach, intelligence feeds, alerts, and operational support.
+
+Case study: [case-studies/self-hosted-n8n-automation-layer.md](case-studies/self-hosted-n8n-automation-layer.md)
 
 ### 3D Services Commercial Website
 
-A private commercial website for an Italian 3D scanning and design studio, built to connect public-facing presentation to operational quote intake. Multi-page React/Vite experience covering scanning, design, production, materials, FAQ, and a structured quote flow that hands off into the internal operating system.
+A private commercial website for a 3D scanning and design workflow, built to connect public-facing presentation to structured quote intake and the internal operating system.
 
-Case study: `case-studies/3d-services-website.md`
+Case study: [case-studies/3d-services-website.md](case-studies/3d-services-website.md)
 
-## Workflow Walkthroughs
+## Screenshots and Walkthroughs
 
-Sanitized n8n workflow screenshots and architecture notes will be added to `workflows/`. Until then, walkthroughs of the lead qualification, scoring, and handoff flows are provided on call.
+Screenshots and diagrams should be added only after privacy review. They must use fixtures or blurred data: no client names, project IDs, prices, emails, phone numbers, private endpoints, workflow IDs, or credentials.
+
+Until then, live walkthroughs can be provided on call with sanitized data.
 
 ## Public Sharing Rule
 
@@ -55,12 +62,12 @@ Real source repositories remain private. The safer public approach is:
 1. Keep operational source private.
 2. Publish sanitized case studies, screenshots, and architecture notes.
 3. Link to live public sites where appropriate.
-4. Provide live demos and walkthroughs on call rather than exposing internal source.
+4. Provide live demos and walkthroughs on call instead of exposing internal source.
 
-See `SANITIZATION-CHECKLIST.md` for the review process applied before any sanitized publication.
+See [SANITIZATION-CHECKLIST.md](SANITIZATION-CHECKLIST.md) before making any source or screenshot public.
 
 ## Contact
 
-- Email: matteo.passeri.407@gmail.com
+- Email: matteo.passeri.407@outlook.it
 - LinkedIn: https://linkedin.com/in/matteo-passeri-me3d
 - Site: https://aienabledops.it

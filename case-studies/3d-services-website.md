@@ -6,9 +6,9 @@ A private commercial website built for an Italian 3D scanning and design studio.
 
 Client name and live URL are kept private.
 
-## RevOps Angle
+## Operations Angle
 
-The build focuses on the marketing-to-quote handoff: a structured public site that does not stop at a contact form, but routes prospects into a quote flow connected to the broader internal operating system.
+The build focuses on the marketing-to-quote handoff: a structured public site that does not stop at a generic contact form, but routes prospects into a quote flow connected to the broader internal operating system.
 
 ## System Built
 

@@ -4,9 +4,9 @@
 
 A public consulting site (aienabledops.it) connected to a private lead lifecycle and qualification workflow. The system was built to demonstrate that a small business can run a documented, auditable lead pipeline instead of losing context between form, qualification, booking, CRM, and follow-up.
 
-This is the flagship RevOps build of the portfolio: it covers the full funnel from public intake to qualified booking, with deterministic rules, AI-assisted scoring, CRM storage, alerting, and explicit operational handoff.
+This is the flagship lead lifecycle build of the portfolio: it covers the flow from public intake to qualified booking, with deterministic rules, AI-assisted scoring, CRM storage, alerting, and explicit operational handoff.
 
-## RevOps Problem
+## Lead Lifecycle Problem
 
 Most small-business lead flows lose context across:
 
@@ -16,7 +16,7 @@ Most small-business lead flows lose context across:
 - CRM storage and enrichment
 - follow-up and fallback
 
-The result is leads dropped between tools, unqualified meetings on the calendar, and no audit trail. The goal was a single operating pipeline that combines deterministic checks, AI assistance, and human-in-the-loop control.
+The result is dropped context, unqualified meetings on the calendar, and no audit trail. The goal was a single operating pipeline that combines deterministic checks, AI assistance, and human-in-the-loop control.
 
 ## Lifecycle Built
 

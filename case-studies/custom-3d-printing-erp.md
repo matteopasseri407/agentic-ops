@@ -6,9 +6,9 @@ A private ERP-style operations platform built for an Italian custom 3D printing 
 
 Client name and project specifics are kept private.
 
-## RevOps Problem
+## Operations Problem
 
-The operation depended on manual quoting, scattered project information, and repeated context rebuilding. Quote preparation took about 25 minutes. Project status, financials, and delivery state were split across tools and memory, with no single source of truth from lead to invoice.
+The operation depended on manual quoting, scattered project information, and repeated context rebuilding. Quote preparation took about 25 minutes. Project status, financials, and delivery state were split across tools and memory, with no single source of truth from lead to delivery.
 
 ## Quote-to-Cash Loop Built
 
