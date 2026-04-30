@@ -2,9 +2,9 @@
 
 ## Summary
 
-A private commercial website built for an Italian 3D scanning and design studio. The site connects public-facing presentation (services, materials, company positioning) to operational quote intake handed off into the internal operating system.
+A public commercial website built for an Italian 3D scanning and design studio. The site connects public-facing presentation (services, materials, company positioning) to operational quote intake handed off into the internal operating system.
 
-Client name and live URL are kept private.
+Live site: https://me3design.it
 
 ## Operations Angle
 
@@ -27,7 +27,7 @@ The build focuses on the marketing-to-quote handoff: a structured public site th
 - React Router
 - Vercel Analytics
 
-Domain, analytics IDs, and any client identifiers are kept private.
+Analytics IDs and any private operational identifiers are kept private.
 
 ## Operating Outcome
 
@@ -37,4 +37,4 @@ Domain, analytics IDs, and any client identifiers are kept private.
 
 ## Demo Approach
 
-Screenshots and a sanitized walkthrough provided on call, with all client identifiers, URLs, and analytics references removed.
+Screenshots and a sanitized walkthrough provided on call, with analytics references and operational/private details removed.

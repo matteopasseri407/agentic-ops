@@ -45,7 +45,9 @@ Case study: [case-studies/self-hosted-n8n-automation-layer.md](case-studies/self
 
 ### 3D Services Commercial Website
 
-A private commercial website for a 3D scanning and design workflow, built to connect public-facing presentation to structured quote intake and the internal operating system.
+A public commercial website for a 3D scanning and design workflow, built to connect service presentation to structured quote intake and the internal operating system.
+
+Live site: https://me3design.it
 
 Case study: [case-studies/3d-services-website.md](case-studies/3d-services-website.md)
 
