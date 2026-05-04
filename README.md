@@ -53,9 +53,11 @@ Case study: [case-studies/3d-services-website.md](case-studies/3d-services-websi
 
 ## Screenshots and Walkthroughs
 
-Screenshots and diagrams should be added only after privacy review. They must use fixtures or blurred data: no client names, project IDs, prices, emails, phone numbers, private endpoints, workflow IDs, or credentials.
+![Sanitized agent context map](assets/agent-context-map.png)
 
-Until then, live walkthroughs can be provided on call with sanitized data.
+This sanitized context map is a public visual proof of the way I structure operational knowledge for AI-assisted work: project state, implementation notes, workflow documentation, reusable runbooks, and handoff material.
+
+It does not expose private source code, client data, credentials, endpoints, workflow IDs, or internal labels. More detailed walkthroughs can be provided on call with sanitized data.
 
 ## Public Sharing Rule
 
