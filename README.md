@@ -31,7 +31,7 @@ Open to **full-remote EU roles** in Operations, Implementation, CRM / Workflow A
 
 A secure context-delivery and memory architecture built to support local and cloud-based AI agents (Claude Code, Codex CLI, custom ChatGPT connectors). By mapping structured operations, personal capabilities, and system runbooks into a Git-versioned Markdown database, this system provides AI agents with instant, high-density context. Includes event-driven Python watchdog autosync daemons and remote R/W Model Context Protocol (MCP) server endpoints behind Caddy.
 
-Case study: [case-studies/agentic-knowledge-vault-mcp.md](case-studies/agentic-knowledge-vault-mcp.md)
+Case study: [English Version](case-studies/agentic-knowledge-vault-mcp.md) | [Versione Italiana](case-studies/agentic-knowledge-vault-mcp-it.md)
 
 ### AI-Assisted Lead Qualification & Booking Funnel
 
