@@ -2,6 +2,10 @@
 
 Sanitized case studies for operations systems, CRM workflows, ERP transition, quote-to-cash visibility, n8n automation, and AI-assisted implementation.
 
+# Matteo Passeri - Operations Systems Portfolio
+
+Sanitized case studies for operations systems, CRM workflows, ERP transition, quote-to-cash visibility, n8n automation, and AI-assisted implementation.
+
 I build practical operating systems for small teams: lead intake, qualification workflows, quoting, pipeline visibility, reporting, alerting, SOPs, and handoff documentation.
 
 The real source repositories remain private to protect client data, business logic, workflow exports, credentials, endpoints, and operational details. This repository is the public proof layer: outcomes, architecture summaries, and sanitized case studies.
@@ -10,6 +14,8 @@ Open to **full-remote EU roles** in Operations, Implementation, CRM / Workflow A
 
 ## Focus Areas
 
+- Model Context Protocol (MCP) & Multi-Agent Context Engineering
+- Git-backed, event-driven Personal Knowledge Management (PKM) systems
 - Lead lifecycle management: intake, qualification, scoring, routing
 - CRM-style handoff: structured fields, alerts, status tracking, fallback paths
 - Quote-to-cash visibility: clients, quotes, work logs, delivery, P&L
@@ -20,6 +26,12 @@ Open to **full-remote EU roles** in Operations, Implementation, CRM / Workflow A
 - Documentation, SOPs, and operational handoff
 
 ## Selected Systems
+
+### The Agentic Second Brain: Git-Backed Multi-Agent MCP Knowledge Vault (Flagship Project)
+
+A secure context-delivery and memory architecture built to support local and cloud-based AI agents (Claude Code, Codex CLI, custom ChatGPT connectors). By mapping structured operations, personal capabilities, and system runbooks into a Git-versioned Markdown database, this system provides AI agents with instant, high-density context. Includes event-driven Python watchdog autosync daemons and remote R/W Model Context Protocol (MCP) server endpoints behind Caddy.
+
+Case study: [case-studies/agentic-knowledge-vault-mcp.md](case-studies/agentic-knowledge-vault-mcp.md)
 
 ### AI-Assisted Lead Qualification & Booking Funnel
 
