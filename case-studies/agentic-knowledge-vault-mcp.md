@@ -69,3 +69,13 @@ To make this second brain accessible to all AI assistants securely, the environm
 * **Zero-Overhead Bootstrapping:** Spinning up a new workspace with Claude Code or Codex takes less than 3 seconds. The agent queries `00-START-HERE.md` and immediately knows the user's working style, exact machine specs, and capability limits.
 * **Up to 80% Token Savings:** Instead of loading full documents or heavy instruction sets, agents pull short, hyper-focused Markdown files on-demand using the MCP search and read tools.
 * **Multi-Workstation Synchronicity:** Any workflow update or system configuration adjustment committed by an agent on one machine is pushed to the cloud, synchronized, and pulled down by other machines at logon, keeping the entire ecosystem aligned.
+
+---
+
+## What's Next: OpsVault
+
+This architecture is currently being refactored and packaged into a reusable open-source tool named **[OpsVault](https://github.com/matteopasseri407/opsvault)**. 
+
+The goal is to provide a single-command deployable stack (MCP Server + Caddy reverse proxy), a lightweight Python autosync daemon for background Git syncing, and standard token-optimized Obsidian templates. This will allow any developer to set up their own secure, cloud-first multi-agent memory layer in minutes.
+
+*Stay tuned! The repository is currently being prepared for its public release under the **AI Enabled Ops** brand.*

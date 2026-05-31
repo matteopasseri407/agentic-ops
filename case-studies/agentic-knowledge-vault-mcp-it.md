@@ -69,3 +69,13 @@ Per rendere questo "secondo cervello" accessibile in modo sicuro a tutti i diver
 * **Bootstrap Istantaneo degli Agenti:** Inizializzare un nuovo workspace di sviluppo o di automazione richiede meno di 3 secondi. L'agente interroga il file `00-START-HERE.md` e conosce immediatamente lo stile di collaborazione, le specifiche esatte della macchina ospite e i limiti decisionali da rispettare.
 * **Risparmio del 80% dei Token:** Anziché caricare interi documenti o pesanti manuali di istruzioni ad ogni turno, gli agenti estraggono note Markdown brevi e iper-mirate solo quando necessario tramite i tool di ricerca e lettura MCP.
 * **Sincronizzazione Multi-Workstation Real-time:** Qualsiasi aggiornamento di processo o nota tecnica scritto da un agente su una macchina locale o cloud viene pushato sul server centrale Oracle, storicizzato su Git e scaricato automaticamente su tutti gli altri dispositivi dell'operatore umano al login successivo, mantenendo l'intera infrastruttura perfettamente allineata.
+
+---
+
+## Sviluppi Futuri: OpsVault
+
+Questa architettura è attualmente in fase di refactoring e pacchettizzazione per essere rilasciata come strumento open-source con il nome di **[OpsVault](https://github.com/matteopasseri407/opsvault)**.
+
+L'obiettivo è fornire uno stack pronto all'uso deployabile con un singolo comando (MCP Server + Caddy reverse proxy), un daemon Python leggero per la sincronizzazione Git automatica in background, e template Obsidian standard già ottimizzati per i token. Questo permetterà a qualsiasi sviluppatore o team di configurare il proprio layer di memoria remota multi-agente in pochi minuti.
+
+*Il repository pubblico è in fase di preparazione e verrà rilasciato a breve sotto il brand **AI Enabled Ops**.*
