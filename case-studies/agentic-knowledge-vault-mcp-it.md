@@ -1,11 +1,11 @@
-# Il Secondo Cervello Agentico: Architettura di Conoscenza MCP Multi-Agente Sincronizzata via Git
+# Il Secondo Cervello Agentico: Architettura di Conoscenza Multi-Agente Sincronizzata via Git
 
 ## Sintesi
-Un'architettura di persistenza del contesto e memoria di livello di produzione, progettata per supportare agenti AI locali e cloud (Claude Code, Codex CLI, connettori ChatGPT personalizzati). Mappando operazioni aziendali strutturate, capacità operative personali e procedure (SOP) in un database Markdown tracciato con Git, questo sistema fornisce agli agenti AI un contesto operativo istantaneo e ad altissima densità.
+Un'architettura funzionante di persistenza del contesto e memoria operativa, progettata per supportare agenti AI locali e cloud. Mappando operazioni strutturate, limiti decisionali e procedure in una base di conoscenza Markdown tracciata con Git, questo sistema fornisce agli agenti AI contesto operativo mirato senza esporre note private grezze.
 
-Questa architettura risolve definitivamente il problema della "perdita di contesto" (*context drift*) e dello spreco di token implementando un protocollo di recupero mirato (*requirements-first*) accoppiato a un sistema di sincronizzazione event-driven e a endpoint server MCP (Model Context Protocol) ibridi.
+Questa architettura affronta il problema della "perdita di contesto" (*context drift*) e dello spreco di token attraverso un protocollo di recupero mirato, sincronizzazione basata su Git e pattern di accesso MCP (Model Context Protocol) limitati.
 
-*Nota: Questo caso studio è completamente sanificato. Indirizzi IP, domini, token di sicurezza, percorsi di sistema privati e credenziali cifrate in GPG sono strettamente isolati e mantenuti privati.*
+*Nota: Questo caso studio è sanificato. Indirizzi IP, domini, token di sicurezza, percorsi di sistema privati, dettagli di gestione credenziali e contenuti del vault privato sono esclusi intenzionalmente.*
 
 ---
 
@@ -17,65 +17,59 @@ Quando si collabora con agenti AI avanzati per lo sviluppo di codice e l'automaz
 
 ---
 
-## L'Architettura Costruita (I 4 Layer del Sistema)
+## L'Architettura Costruita
 
 ```mermaid
 graph TD
-    subgraph Workstation Locali (Fedora / Windows)
+    subgraph Workstations["Workstation Locali"]
         Obsidian["Interfaccia Umana (Obsidian)"] -->|Modifica Locale| LocalVault["Vault Markdown Locale"]
-        LocalVault -->|Watchdog Event-driven (Python)| GitPush["Commit & Push Automatico"]
-        LocalAgents["Agenti Locali (Claude Code, Codex)"] <-->|Filesystem MCP Diretto| LocalVault
+        LocalVault -->|Watchdog Event-driven| GitSync["Commit & Sync Git"]
+        LocalAgents["Agenti AI Locali"] <-->|Accesso Locale Diretto| LocalVault
     end
 
-    subgraph Controllo Versione
-        GitPush -->|SSH / HTTPS| GitHubPrivate["Repository Git Privato"]
-        GitPush -->|SSH Push| OracleBareGit["Repo Git Bare (Oracle Cloud)"]
+    subgraph Versioning["Layer di Versioning"]
+        GitSync -->|Sync Privata| PrivateGit["Remote Git Privato"]
     end
 
-    subgraph Runtime Cloud (VPS Oracle Cloud)
-        OracleBareGit -->|post-receive git hook| WorkingCopy["Copia di Lavoro Attiva su Oracle"]
-        
-        Caddy["Reverse Proxy Caddy (TLS)"] <--> TrustedMCP["Server MCP Trusted (Autenticato)"]
-        Caddy <--> PublicMCP["Server MCP Pubblico (Solo Lettura)"]
-        
-        WorkingCopy <-->|Scritture Trusted (Commit-Backed)| TrustedMCP
-        WorkingCopy --->|Solo Lettura con Filtro Path| PublicMCP
+    subgraph RemoteRuntime["Runtime Remoto Limitato"]
+        PrivateGit -->|Deploy Snapshot Corrente| WorkingCopy["Copia di Lavoro Attiva"]
+        AccessLayer["Layer MCP Autenticato"] -->|Retrieval Filtrato| WorkingCopy
     end
 
-    subgraph AI Esterne
-        CustomChatGPT["Connettore Custom ChatGPT"] <-->|Chiamate API| Caddy
+    subgraph ExternalAI["AI Cloud"]
+        CustomConnector["Connettore / Agente Remoto"] <-->|Chiamate Limitate| AccessLayer
     end
 ```
 
 ### Layer 1: Il Vault Markdown Canonico (Base di Conoscenza)
 La fondazione è un vault Obsidian in Markdown strutturato appositamente per un recupero ad alta precisione (*retrieval-first*). Funge da singola fonte di verità per fatti, limiti operativi, progetti attivi, guide operative e brand voice.
-* **Requirements-First Routing:** Un protocollo di ingresso rigoroso (`00-START-HERE.md`) obbliga gli agenti a leggere prima la mappa dell'indice e poi ad accedere esclusivamente alla singola nota utile per il task corrente.
-* **Isolamento di Sicurezza:** Le credenziali in chiaro sono severamente vietate. Il vault contiene solo un indice dei sistemi non sensibile (`99-SECRETS/secrets-registry.md`), mentre le credenziali e i segreti reali sono conservati in un archivio locale cifrato offline via GPG.
+* **Requirements-First Routing:** Un protocollo di ingresso rigoroso obbliga gli agenti a leggere prima la mappa dell'indice e poi ad accedere esclusivamente alla singola nota utile per il task corrente.
+* **Isolamento di Sicurezza:** Le credenziali in chiaro sono escluse dal ciclo di sync. Nel layer di conoscenza restano solo puntatori non sensibili; credenziali e configurazioni runtime private restano fuori dal materiale pubblico.
 
 ### Layer 2: Pipeline di Sincronizzazione e Deployment Ibrida
 Gli aggiornamenti della memoria operativa sono completamente automatizzati tramite Git e un daemon locale leggero:
-* **Autosync Event-Driven:** Un daemon Python in background basato sulla libreria `watchdog` gira come servizio utente `systemd` su Linux (e replicato su Windows). Rileva le modifiche ai file del vault, attende 60 secondi di inattività (debounce) per evitare spam di commit, esegue il commit automatico e lancia il push.
-* **Deployment lato Cloud:** Le modifiche vengono pushate a un repository Git bare ospitato su Oracle Cloud. Un hook Git `post-receive` personalizzato esegue automaticamente il checkout dell'ultimo commit su una directory di lavoro attiva, rendendo gli aggiornamenti immediatamente disponibili.
+* **Autosync Event-Driven:** Un daemon Python leggero rileva le modifiche ai file del vault, applica un debounce per evitare rumore, committa le modifiche validate e le sincronizza su un remote privato.
+* **Deployment lato Cloud:** Un runtime remoto limitato riceve lo snapshot corrente e rende disponibile solo la superficie di retrieval necessaria agli agenti autorizzati.
 
 ### Layer 3: Layer di Accesso Model Context Protocol (MCP)
-Per rendere questo "secondo cervello" accessibile in modo sicuro a tutti i diversi assistenti AI, l'infrastruttura espone due server MCP configurati dietro un reverse proxy Caddy con gestione TLS/SSL automatica:
-1. **MCP Filesystem Locale:** Gli agenti che girano sulla macchina locale (come Claude Code o Codex CLI) interrogano direttamente il filesystem del vault locale, garantendo latenza zero.
-2. **Server MCP Remoto Trusted (Lettura/Scrittura):** Permette ad agenti cloud autorizzati o workflow remoti di interagire con il vault. Ogni operazione di scrittura (es. creazione di una nota, aggiornamento dello stato di avanzamento) è gestita con un sistema di file lock per evitare conflitti, committata automaticamente su Git con metadati strutturati, e deployata.
-3. **Server MCP Remoto Pubblico (Solo Lettura):** Un endpoint remoto ad accesso limitato e filtrato sui percorsi del vault, progettato per connettere in sicurezza sistemi esterni come custom connector di ChatGPT senza esporre moduli privati o architetture di backend sensibili.
+Per rendere questo "secondo cervello" accessibile agli assistenti AI in modo sicuro, l'implementazione separa accesso locale, retrieval remoto autenticato e scritture protette:
+1. **Accesso Locale:** Gli agenti sulla macchina locale interrogano il vault locale con latenza minima.
+2. **Retrieval Remoto Autenticato:** Agenti cloud e connector possono recuperare solo note selezionate tramite una superficie MCP limitata.
+3. **Scritture Protette:** Le operazioni di scrittura restano private, serializzate e tracciate via Git, con gestione conservativa dei conflitti.
 
 ---
 
 ## Risultati Ottenuti
-* **Bootstrap Istantaneo degli Agenti:** Inizializzare un nuovo workspace di sviluppo o di automazione richiede meno di 3 secondi. L'agente interroga il file `00-START-HERE.md` e conosce immediatamente lo stile di collaborazione, le specifiche esatte della macchina ospite e i limiti decisionali da rispettare.
-* **Risparmio del 80% dei Token:** Anziché caricare interi documenti o pesanti manuali di istruzioni ad ogni turno, gli agenti estraggono note Markdown brevi e iper-mirate solo quando necessario tramite i tool di ricerca e lettura MCP.
-* **Sincronizzazione Multi-Workstation Real-time:** Qualsiasi aggiornamento di processo o nota tecnica scritto da un agente su una macchina locale o cloud viene pushato sul server centrale Oracle, storicizzato su Git e scaricato automaticamente su tutti gli altri dispositivi dell'operatore umano al login successivo, mantenendo l'intera infrastruttura perfettamente allineata.
+* **Bootstrap Rapido degli Agenti:** Una nuova sessione parte da una mappa compatta e recupera solo le note richieste dal task corrente.
+* **Meno Spreco di Contesto:** Invece di caricare documenti interi o istruzioni pesanti, gli agenti recuperano file Markdown brevi e mirati on demand.
+* **Coerenza Multi-Workstation:** Gli aggiornamenti durevoli possono essere sincronizzati tra workstation preservando storia Git e revisionabilità.
 
 ---
 
 ## Sviluppi Futuri: OpsVault
 
-Questa architettura è attualmente in fase di refactoring e pacchettizzazione per essere rilasciata come strumento open-source con il nome di **[OpsVault](https://github.com/matteopasseri407/opsvault)**.
+Questa architettura è in fase di refactoring verso un progetto pubblico più piccolo chiamato **OpsVault**.
 
-L'obiettivo è fornire uno stack pronto all'uso deployabile con un singolo comando (MCP Server + Caddy reverse proxy), un daemon Python leggero per la sincronizzazione Git automatica in background, e template Obsidian standard già ottimizzati per i token. Questo permetterà a qualsiasi sviluppatore o team di configurare il proprio layer di memoria remota multi-agente in pochi minuti.
+La release pubblica punterà su template riusabili, regole di sanitizzazione, script di bootstrap locali e una reference architecture sicura. I dettagli dell'implementazione privata, la topologia production, le credenziali e il contenuto del vault personale resteranno privati e potranno essere discussi in walkthrough live con esempi sanificati.
 
-*Il repository pubblico è in fase di preparazione e verrà rilasciato a breve sotto il brand **AI Enabled Ops**.*
+In questo modo il valore da portfolio resta visibile senza pubblicare una copia diretta del sistema operativo privato.
