@@ -8,6 +8,21 @@ The real source repositories remain private to protect client data, business log
 
 Open to **full-remote EU roles** in Operations, Implementation, CRM / Workflow Automation, Marketing Ops, Growth Ops-adjacent work, and AI Workflow operations.
 
+## Nota per recruiter italiani
+
+Questo repository e' una vetrina sanificata: mostra problemi risolti, architetture logiche, risultati operativi e metodo di lavoro senza esporre sorgenti privati, dati cliente, endpoint, workflow n8n grezzi o credenziali.
+
+Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, sistemi interni, documentazione e AI applicata ai processi. Non e' pensato per presentarmi come developer puro, ma come una persona capace di trasformare problemi operativi in sistemi funzionanti usando anche AI-assisted execution.
+
+## How To Read This Portfolio
+
+| Signal | Where to look | What it proves |
+| --- | --- | --- |
+| Sanitized operations systems | Case studies in this repository | System thinking, process ownership, handoff design, safe public documentation |
+| Public technical source | [HP EliteBook Ryzen Tuning](https://github.com/matteopasseri407/hp-elitebook-845-g8-ryzen-tuning) | Linux/systemd/udev automation, CI, releases, packaging discipline |
+| Agent context architecture | Agentic Second Brain / OpsVault case study | AI-agent context design, retrieval discipline, Git-backed memory and sanitization |
+| Live business-facing work | [AI Enabled Ops](https://aienabledops.it), [ME3Design](https://me3design.it) | Ability to connect public-facing experiences with private operational workflows |
+
 ## Focus Areas
 
 - Model Context Protocol (MCP) & Multi-Agent Context Engineering
@@ -30,6 +45,12 @@ A secure context-delivery and memory architecture built to support local and clo
 The full implementation stays private. A smaller public extraction, **OpsVault**, is being prepared as a sanitized portfolio project under the AI Enabled Ops brand.
 
 Case study: [English Version](case-studies/agentic-knowledge-vault-mcp.md) | [Versione Italiana](case-studies/agentic-knowledge-vault-mcp-it.md)
+
+### Public Linux Workstation Automation
+
+A public source project for HP AMD business laptops, built from a real workstation tuning need. It includes thermal/power profiles, systemd services, udev rules, sleep hooks, a GNOME Shell indicator, CI checks, GitHub releases, Fedora COPR packaging, and conservative hardware guardrails.
+
+Repo: [hp-elitebook-845-g8-ryzen-tuning](https://github.com/matteopasseri407/hp-elitebook-845-g8-ryzen-tuning)
 
 ### AI-Assisted Lead Qualification & Booking Funnel
 
