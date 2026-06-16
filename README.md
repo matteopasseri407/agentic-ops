@@ -10,9 +10,9 @@ Open to **full-remote EU roles** in Operations, Implementation, CRM / Workflow A
 
 ## Nota per recruiter italiani
 
-Questo repository e' una vetrina sanificata: mostra problemi risolti, architetture logiche, risultati operativi e metodo di lavoro senza esporre sorgenti privati, dati cliente, endpoint, workflow n8n grezzi o credenziali.
+Questo repository è una vetrina sanificata: mostra problemi risolti, architetture logiche, risultati operativi e metodo di lavoro senza esporre sorgenti privati, dati cliente, endpoint, workflow n8n grezzi o credenziali.
 
-Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, sistemi interni, documentazione e AI applicata ai processi. Non e' pensato per presentarmi come developer puro, ma come una persona capace di trasformare problemi operativi in sistemi funzionanti usando anche AI-assisted execution.
+Il profilo è tecnico-operativo: operations, ERP/CRM, workflow automation, sistemi interni, documentazione e AI applicata ai processi. Non è pensato per presentarmi come developer puro, ma come una persona capace di trasformare problemi operativi in sistemi funzionanti usando anche AI-assisted execution.
 
 ## How To Read This Portfolio
 
