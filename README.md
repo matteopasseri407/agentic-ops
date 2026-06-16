@@ -21,7 +21,7 @@ Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 | Sanitized operations systems | Case studies in this repository | System thinking, process ownership, handoff design, safe public documentation |
 | Public technical source | [HP EliteBook Ryzen Tuning](https://github.com/matteopasseri407/hp-elitebook-845-g8-ryzen-tuning) | Linux/systemd/udev automation, CI, releases, packaging discipline |
 | Agent context architecture | Agentic Second Brain / OpsVault case study | AI-agent context design, retrieval discipline, Git-backed memory and sanitization |
-| Live business-facing work | [AI Enabled Ops](https://aienabledops.it), [ME3Design](https://me3design.it) | Ability to connect public-facing experiences with private operational workflows |
+| Live business-facing work | [ME3Design](https://me3design.it) | Ability to connect public-facing experiences with private operational workflows |
 
 ## Focus Areas
 
@@ -42,7 +42,7 @@ Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 
 A secure context-delivery and memory architecture built to support local and cloud-based AI agents. By mapping structured operations, personal capabilities, and system runbooks into a Git-versioned Markdown knowledge base, this system gives agents targeted, high-density context without exposing raw private notes.
 
-The full implementation stays private. A smaller public extraction, **OpsVault**, is being prepared as a sanitized portfolio project under the AI Enabled Ops brand.
+The full implementation stays private. A smaller public extraction, **OpsVault**, is being prepared as a sanitized portfolio project.
 
 Case study: [English Version](case-studies/agentic-knowledge-vault-mcp.md) | [Versione Italiana](case-studies/agentic-knowledge-vault-mcp-it.md)
 
@@ -55,8 +55,6 @@ Repo: [hp-elitebook-845-g8-ryzen-tuning](https://github.com/matteopasseri407/hp-
 ### AI-Assisted Lead Qualification & Booking Funnel
 
 A live consulting site connected to a private lead lifecycle workflow. The system replaces a typical "contact form into nowhere" flow with a documented operating pipeline: form intake, deterministic pre-checks, LLM-assisted scoring and brief generation, CRM storage, Calendly event handling, Telegram alerts, email fallbacks, and handoff logic.
-
-Public site: https://aienabledops.it
 
 Case study: [case-studies/ai-enabled-ops-funnel.md](case-studies/ai-enabled-ops-funnel.md)
 
@@ -105,4 +103,3 @@ See [SANITIZATION-CHECKLIST.md](SANITIZATION-CHECKLIST.md) before making any sou
 
 - Email: matteo.passeri.407@outlook.it
 - LinkedIn: https://linkedin.com/in/matteo-passeri-me3d
-- Site: https://aienabledops.it
