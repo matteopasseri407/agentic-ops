@@ -1,75 +1,126 @@
-# The Agentic Second Brain: Git-Backed Multi-Agent Knowledge Architecture
+# Multi-Agent Orchestration Architecture: Git-Backed Command, Memory & Coordination Layer
 
 ## Summary
-A working secure context-delivery and memory architecture built to support local and cloud-based AI agents. By mapping structured operations, capability boundaries, and system runbooks into a Git-versioned Markdown knowledge base, this system provides AI agents with targeted operational context without exposing raw private notes.
 
-This architecture addresses "context drift" and token waste through a strict retrieval protocol, Git-backed synchronization, and restricted Model Context Protocol (MCP) access patterns.
+A production architecture that orchestrates multiple AI agents across capability tiers (L0 deterministic through L4 frontier), runtime environments (OpenCode Go, Codex, local), and devices. It combines a single-source-of-truth command layer, tiered delegation rules, automated handoff protocols, Model Context Protocol (MCP) endpoints, and Git-backed persistent memory into one operating system for AI-assisted work.
 
-*Note: This case study is sanitized. Server IPs, domains, security tokens, private system paths, credential storage details, and private note contents are intentionally excluded.*
+The system doesn't just store context. It **governs** how agents operate: which model handles which task, when to escalate, how to delegate, and what verification gates must pass before work is declared done.
 
----
-
-## The Operational Problem
-When collaborating with advanced AI coding and automation agents across different devices, three major challenges arise:
-1. **Context Drift & Inefficiency:** AI agents lose context between sessions, requiring manual bootstrapping or massive, repetitive file dumps that clutter the context window and drive up token consumption.
-2. **Security Risks:** Storing sensitive information (credentials, API webhooks, client data) directly in active workspaces or in plain-text prompts leads to inevitable security leaks.
-3. **Synchronicity & Friction:** Keeping operational memory updated across multiple physical workstations (e.g., Fedora Linux laptops, Windows desktops) and cloud-based automation environments without manual copy-pasting.
+*Note: This case study is sanitized. Agent identities, server IPs, credentials, private runbooks, and production workflow internals are excluded.*
 
 ---
 
-## The 4-Layer Architecture Built
+## The Orchestration Problem
+
+Using AI agents effectively is not a model-quality problem. It's a coordination problem:
+
+1. **No Shared Operating Doctrine:** Every agent session starts from scratch. Without a unified command layer, agents drift, duplicate work, or overstep into tasks beyond their capability tier.
+2. **No Tiered Routing:** Running every task through a frontier model burns budget. Running complex tasks through cheap models produces unreliable output. Without explicit routing rules, both happen.
+3. **No Persistent Memory:** Agents forget between sessions. Rebuilding context wastes tokens and introduces inconsistency.
+4. **No Escalation Protocol:** When a cheap agent fails, it retries blindly instead of escalating. When a complex task arrives, no gate determines whether it requires frontier judgment.
+
+---
+
+## The Architecture: 4 Layers
 
 ```mermaid
 graph TD
-    subgraph Workstations["Client Workstations"]
-        Obsidian["Human Interface (Obsidian)"] -->|Local Edit| LocalVault["Local Markdown Vault"]
-        LocalVault -->|Event-driven Watchdog| GitSync["Git Commit & Sync"]
-        LocalAgents["Local AI Agents"] <-->|Direct Local Access| LocalVault
+    subgraph CommandLayer["Command Layer (AGENTS.md)"]
+        Bootstrap["Single Bootstrap File"] -->|Defines| Tiers["L0-L4 Capability Tiers"]
+        Bootstrap -->|Defines| Routing["Tiered Routing Rules"]
+        Bootstrap -->|Defines| Escalation["Escalation Triggers"]
+        Bootstrap -->|Defines| Governor["Quality-Cost Governor"]
     end
 
-    subgraph Versioning["Versioning Layer"]
-        GitSync -->|Private Sync| PrivateGit["Private Git Remote"]
+    subgraph Agents["Agent Fleet"]
+        L0["L0: Shell, grep, tests"]
+        L1["L1: Bulk agents (Flash)"]
+        L2["L2: Daily execution (V4-Pro)"]
+        L3["L3: Escalation (Kimi/Qwen)"]
+        L4["L4: Frontier (Opus/GPT-5.5)"]
     end
 
-    subgraph RemoteRuntime["Restricted Remote Runtime"]
-        PrivateGit -->|Deploy Current Snapshot| WorkingCopy["Active Working Copy"]
-        AccessLayer["Authenticated MCP Access Layer"] -->|Filtered Retrieval| WorkingCopy
+    subgraph Memory["Persistent Memory (Knowledge Vault)"]
+        Facts["Operational Facts"]
+        Runbooks["System Runbooks"]
+        HandoffTemplates["Handoff Templates"]
     end
 
-    subgraph ExternalAI["Cloud AI Tools"]
-        CustomConnector["Custom Connector / Remote Agent"] <-->|Restricted Calls| AccessLayer
+    subgraph Access["Access Layer"]
+        LocalMCP["Local MCP Endpoints"]
+        RemoteMCP["Remote MCP (Oracle VPS)"]
+        GitSync["Git Auto-Sync Pipeline"]
     end
+
+    CommandLayer -->|Commands| Agents
+    Agents <-->|Retrieve/Store| Memory
+    Memory <-->|Sync| GitSync
+    Agents <-->|Query| Access
+    L2 -->|Delegates to| L1
+    L2 -->|Escalates to| L3
+    L2 -->|Escalates to| L4
 ```
 
-### Layer 1: The Canonical Markdown Vault (Knowledge Layer)
-The foundation is a structured Obsidian-compatible Markdown vault organized for precision retrieval. It acts as the single source of truth for facts, capability limits, active projects, system runbooks, and brand voice.
-* **Requirements-First Routing:** A strict entry-point protocol forces agents to read the map first and then query only the specific note required for the active task.
-* **Security Isolation:** Plain-text credentials are banned from the sync loop. Only non-sensitive recovery pointers are documented; actual credentials and private runtime configuration stay outside the public knowledge layer.
+### Layer 1: The Command Layer (AGENTS.md)
 
-### Layer 2: Hybrid Sync & Deployment Pipeline
-Memory updates are entirely automated using Git and a lightweight local daemon:
-* **Event-Driven Auto-Sync:** A lightweight Python daemon monitors vault changes, debounces noisy file saves, commits validated changes, and syncs them to a private remote.
-* **Server-Side Deployment:** A restricted remote runtime receives the newest sanitized snapshot and exposes only the retrieval surface needed by trusted agents.
+A single, compact bootstrap file serves as the operating doctrine for every agent that touches the system. It defines:
 
-### Layer 3: Model Context Protocol (MCP) Access Layer
-To make this second brain accessible to AI assistants safely, the implementation separates local access, authenticated remote retrieval, and protected write flows:
-1. **Local Access:** Local agents query the local vault instance for fast, low-friction context.
-2. **Authenticated Remote Retrieval:** Cloud agents and connectors can retrieve selected notes through a restricted MCP surface.
-3. **Protected Writes:** Write operations remain private, serialized, and Git-backed, with conservative conflict handling.
+- **Capability Tiers (L0-L4):** Exactly which model or tool handles which class of task. L0 for deterministic commands, L1 for bulk/scans, L2 for daily execution, L3 for escalation, L4 for frontier judgment.
+- **Tiered Routing Rules:** Default-start rules (always L2 first), de-escalation rules (automatic downward delegation), escalation triggers (two failures, high ambiguity, security/irreversible work).
+- **Quality-Cost Governor:** "Maximize verified high-quality output per frontier token consumed." Prohibits both cheap work that produces mediocre output and frontier waste on tasks shells or cheap models can handle.
+- **Handoff Templates:** Canonical format for delegating work downward and reporting results upward. Prevents context loss between agent handoffs.
+
+### Layer 2: The Agent Fleet
+
+Multiple AI models operating under a single command doctrine, across different runtimes:
+
+- **Same bootstrap, different models:** Every agent — from cheap bulk scanners to frontier judges — reads the same AGENTS.md. The bootstrap defines their role, not their model card.
+- **Cross-runtime coordination:** L2 agents in OpenCode Go can summon L3 escalation agents in the same runtime, or signal-and-stop for L4 frontier review across runtimes.
+- **Sub-agent delegation:** L2 planners decompose tasks and fan out to L1 workers, then review and merge results.
+
+### Layer 3: Persistent Memory (Knowledge Vault)
+
+A Git-versioned Markdown knowledge base structured for targeted retrieval:
+
+- **Requirements-First Routing:** Agents must read the index first, then pull only the specific note needed — no preloading entire trees.
+- **Security Isolation:** Credentials and private runtime configuration stay outside the sync loop. Only non-sensitive pointers are documented.
+- **Multi-Device Consistency:** The same knowledge base syncs across Windows desktop, Fedora laptop, and cloud VPS via automated Git pipelines.
+
+### Layer 4: Access Layer (MCP + Git Sync)
+
+- **Local MCP Endpoints:** Local agents query the vault with near-zero latency.
+- **Remote MCP (Oracle VPS):** Cloud agents and n8n workflows retrieve context through authenticated, restricted endpoints.
+- **Event-Driven Auto-Sync:** A lightweight daemon monitors vault changes, debounces saves, commits, and pushes to a private Git remote.
+- **Protected Writes:** Write operations are serialized, Git-backed, with conservative conflict handling.
+
+---
+
+## What This Enables (Beyond Memory)
+
+| Capability | Without This Architecture | With It |
+|---|---|---|
+| Agent starts new session | Manual re-briefing, context drift | Reads bootstrap → knows role, rules, limits instantly |
+| Task is too complex for current tier | Blind retry, silent failure | Two-failure rule triggers automatic escalation |
+| Task is trivial/bulk | Frontier model wasted on it | Automatic de-escalation to L1 bulk agent |
+| Work done by sub-agent | Context lost, results unverified | Returns via handoff template: result, files touched, verification, risks |
+| New device or agent joins | Manual setup, inconsistent config | Clones vault → reads AGENTS.md → fully operational |
+| Cost control | No visibility, frontier overuse | Quality-cost governor baked into every agent's decision loop |
 
 ---
 
 ## Core Outcomes
-* **Fast Agent Bootstrapping:** A new agent session starts from a compact map and pulls only the notes required for the current task.
-* **Lower Context Waste:** Instead of loading full documents or heavy instruction sets, agents retrieve short, focused Markdown files on demand.
-* **Multi-Workstation Consistency:** Durable updates can be synchronized across workstations while preserving Git history and reviewability.
+
+- **Autonomous Multi-Agent Coordination:** Agents self-route based on task risk and complexity. No human dispatcher needed for routine work.
+- **Zero Bootstrap Waste:** A new agent session costs one file read (AGENTS.md) plus task-specific notes only. No full-context dumps.
+- **Cross-Provider Antifragility:** The architecture is provider-agnostic. If a model vendor goes down, agents switch to the next available tier.
+- **Verifiable Quality Gates:** No agent can declare work "done" without showing verification (test pass, build green, diff reviewed).
 
 ---
 
 ## What's Next: OpsVault
 
-This architecture is being refactored into a smaller public project named **OpsVault**.
+This architecture is being extracted into a public reference project (**OpsVault**) with reusable templates, sanitization rules, bootstrap scripts, and a safe reference architecture.
 
-The public release will focus on reusable templates, sanitization rules, local bootstrap scripts, and a safe reference architecture. The private implementation details, production topology, credentials, and personal vault content will remain private and can be discussed in live walkthroughs with sanitized examples.
+The private implementation — production topology, agent identities, credentials, workflow exports, and personal vault content — remains private and can be discussed in live walkthroughs with sanitized examples.
 
-This keeps the portfolio value visible without publishing a direct clone of the private operating system.
+This keeps the portfolio value visible without publishing the private operating system.

@@ -20,12 +20,14 @@ Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 | --- | --- | --- |
 | Sanitized operations systems | Case studies in this repository | System thinking, process ownership, handoff design, safe public documentation |
 | Public technical source | [HP EliteBook Ryzen Tuning](https://github.com/matteopasseri407/hp-elitebook-845-g8-ryzen-tuning) | Linux/systemd/udev automation, CI, releases, packaging discipline |
-| Agent context architecture | Agentic Second Brain / OpsVault case study | AI-agent context design, retrieval discipline, Git-backed memory and sanitization |
+| Multi-agent orchestration | OpsVault case study | AI-agent orchestration, tiered routing, escalation protocols, Git-backed command layer and persistent memory |
 | Live business-facing work | [ME3Design](https://me3design.it) | Ability to connect public-facing experiences with private operational workflows |
 
 ## Focus Areas
 
-- Model Context Protocol (MCP) & Multi-Agent Context Engineering
+- Multi-Agent Orchestration: tiered routing, escalation protocols, handoff automation
+- Model Context Protocol (MCP) & Cross-Agent Context Engineering
+- AI Agent Tiering & Quality-Cost Governance
 - Git-backed, event-driven Personal Knowledge Management (PKM) systems
 - Lead lifecycle management: intake, qualification, scoring, routing
 - CRM-style handoff: structured fields, alerts, status tracking, fallback paths
@@ -38,11 +40,11 @@ Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 
 ## Selected Systems
 
-### The Agentic Second Brain: Git-Backed Multi-Agent Knowledge Architecture
+### Multi-Agent Orchestration Architecture (OpsVault)
 
-A secure context-delivery and memory architecture built to support local and cloud-based AI agents. By mapping structured operations, personal capabilities, and system runbooks into a Git-versioned Markdown knowledge base, this system gives agents targeted, high-density context without exposing raw private notes.
+A production architecture that orchestrates multiple AI agents across capability tiers (L0-L4) and runtime environments. It combines a single-source-of-truth command layer (AGENTS.md), tiered delegation rules, automated handoff protocols, MCP endpoints, and Git-backed persistent memory into one operating system for AI-assisted work.
 
-The full implementation stays private. A smaller public extraction, **OpsVault**, is being prepared as a sanitized portfolio project.
+The system doesn't just store context. It governs how agents operate: which model handles which task, when to escalate, how to delegate, and what verification gates must pass before work is declared done.
 
 Case study: [English Version](case-studies/agentic-knowledge-vault-mcp.md) | [Versione Italiana](case-studies/agentic-knowledge-vault-mcp-it.md)
 
