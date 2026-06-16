@@ -42,9 +42,7 @@ Il profilo e' tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 
 ### Multi-Agent Orchestration Architecture (OpsVault)
 
-A production architecture that orchestrates multiple AI agents across capability tiers (L0-L4) and runtime environments. It combines a single-source-of-truth command layer (AGENTS.md), tiered delegation rules, automated handoff protocols, MCP endpoints, and Git-backed persistent memory into one operating system for AI-assisted work.
-
-The system doesn't just store context. It governs how agents operate: which model handles which task, when to escalate, how to delegate, and what verification gates must pass before work is declared done.
+A working architecture that coordinates AI agents across capability tiers (L0-L4), runtime environments, and devices. A single Git-versioned bootstrap governs every agent: routing rules, escalation triggers, delegation templates, and quality-cost guardrails. MCP endpoints expose the knowledge base with tiered access controls. In daily use — not a blueprint, but the operating layer through which all AI-assisted work flows.
 
 Case study: [English Version](case-studies/agentic-knowledge-vault-mcp.md) | [Versione Italiana](case-studies/agentic-knowledge-vault-mcp-it.md)
 

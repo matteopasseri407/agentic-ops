@@ -2,125 +2,109 @@
 
 ## Summary
 
-A production architecture that orchestrates multiple AI agents across capability tiers (L0 deterministic through L4 frontier), runtime environments (OpenCode Go, Codex, local), and devices. It combines a single-source-of-truth command layer, tiered delegation rules, automated handoff protocols, Model Context Protocol (MCP) endpoints, and Git-backed persistent memory into one operating system for AI-assisted work.
+A working architecture that coordinates multiple AI agents across capability tiers (L0 through L4), runtime environments (OpenCode Go, Codex, local), and physical devices. A single Git-versioned bootstrap file governs every agent's behavior: which tasks it handles, when to escalate, how to delegate, and what verification is required before work is declared complete.
 
-The system doesn't just store context. It **governs** how agents operate: which model handles which task, when to escalate, how to delegate, and what verification gates must pass before work is declared done.
+The system is in daily use. It is not a blueprint — it is the operating layer through which all AI-assisted work flows. Model Context Protocol (MCP) endpoints expose the knowledge base to agents and automation workflows with tiered access controls.
 
-*Note: This case study is sanitized. Agent identities, server IPs, credentials, private runbooks, and production workflow internals are excluded.*
-
----
-
-## The Orchestration Problem
-
-Using AI agents effectively is not a model-quality problem. It's a coordination problem:
-
-1. **No Shared Operating Doctrine:** Every agent session starts from scratch. Without a unified command layer, agents drift, duplicate work, or overstep into tasks beyond their capability tier.
-2. **No Tiered Routing:** Running every task through a frontier model burns budget. Running complex tasks through cheap models produces unreliable output. Without explicit routing rules, both happen.
-3. **No Persistent Memory:** Agents forget between sessions. Rebuilding context wastes tokens and introduces inconsistency.
-4. **No Escalation Protocol:** When a cheap agent fails, it retries blindly instead of escalating. When a complex task arrives, no gate determines whether it requires frontier judgment.
+*Note: This case study is sanitized. Production topology, agent identities, credentials, and private vault content are excluded.*
 
 ---
 
-## The Architecture: 4 Layers
+## What It Solves
+
+Before this architecture, every AI agent session was an island. Manual re-briefing. Context drift between sessions. Frontier models wasted on bulk tasks. No consistent way to hand off work between agents or to verify completion. No shared memory across devices.
+
+The architecture addresses this with four integrated layers, all versioned in Git and exposed through MCP.
+
+---
+
+## Architecture
 
 ```mermaid
 graph TD
-    subgraph CommandLayer["Command Layer (AGENTS.md)"]
-        Bootstrap["Single Bootstrap File"] -->|Defines| Tiers["L0-L4 Capability Tiers"]
-        Bootstrap -->|Defines| Routing["Tiered Routing Rules"]
-        Bootstrap -->|Defines| Escalation["Escalation Triggers"]
-        Bootstrap -->|Defines| Governor["Quality-Cost Governor"]
+    subgraph Command["Command Layer"]
+        Bootstrap["AGENTS.md (single bootstrap)"]
     end
 
     subgraph Agents["Agent Fleet"]
-        L0["L0: Shell, grep, tests"]
-        L1["L1: Bulk agents (Flash)"]
-        L2["L2: Daily execution (V4-Pro)"]
-        L3["L3: Escalation (Kimi/Qwen)"]
-        L4["L4: Frontier (Opus/GPT-5.5)"]
+        L2["L2: Daily execution"]
+        L1["L1: Bulk/scans"]
+        L3["L3: Escalation"]
+        L4["L4: Frontier review"]
     end
 
-    subgraph Memory["Persistent Memory (Knowledge Vault)"]
-        Facts["Operational Facts"]
-        Runbooks["System Runbooks"]
-        HandoffTemplates["Handoff Templates"]
+    subgraph Memory["Knowledge Vault"]
+        Notes["Markdown notes"]
     end
 
-    subgraph Access["Access Layer"]
-        LocalMCP["Local MCP Endpoints"]
-        RemoteMCP["Remote MCP (Oracle VPS)"]
-        GitSync["Git Auto-Sync Pipeline"]
+    subgraph Access["Access"]
+        MCP["MCP Endpoints"]
+        Git["Git sync pipeline"]
     end
 
-    CommandLayer -->|Commands| Agents
-    Agents <-->|Retrieve/Store| Memory
-    Memory <-->|Sync| GitSync
-    Agents <-->|Query| Access
-    L2 -->|Delegates to| L1
-    L2 -->|Escalates to| L3
-    L2 -->|Escalates to| L4
+    Bootstrap -->|Governs| Agents
+    Agents -->|Read/write| Memory
+    Memory -->|Synced via| Git
+    Agents -->|Query via| MCP
+    L2 -->|Delegates| L1
+    L2 -->|Escalates| L3
+    L2 -->|Escalates| L4
 ```
 
-### Layer 1: The Command Layer (AGENTS.md)
+### Command Layer
 
-A single, compact bootstrap file serves as the operating doctrine for every agent that touches the system. It defines:
+A single `AGENTS.md` file defines the operating doctrine shared by every agent. It specifies:
 
-- **Capability Tiers (L0-L4):** Exactly which model or tool handles which class of task. L0 for deterministic commands, L1 for bulk/scans, L2 for daily execution, L3 for escalation, L4 for frontier judgment.
-- **Tiered Routing Rules:** Default-start rules (always L2 first), de-escalation rules (automatic downward delegation), escalation triggers (two failures, high ambiguity, security/irreversible work).
-- **Quality-Cost Governor:** "Maximize verified high-quality output per frontier token consumed." Prohibits both cheap work that produces mediocre output and frontier waste on tasks shells or cheap models can handle.
-- **Handoff Templates:** Canonical format for delegating work downward and reporting results upward. Prevents context loss between agent handoffs.
+- **Capability tiers (L0-L4):** which model or tool for which task class
+- **Default routing:** always start at L2, de-escalate downward automatically, escalate upward on defined triggers
+- **Escalation triggers:** two consecutive failures, high ambiguity, security-sensitive or irreversible work, UI/design judgment
+- **Delegation/handoff format:** a canonical template for passing work between agents without context loss
+- **Quality-cost governor:** the rule that governs every routing decision
 
-### Layer 2: The Agent Fleet
+### Agent Fleet
 
-Multiple AI models operating under a single command doctrine, across different runtimes:
+Multiple models across multiple providers, all reading the same bootstrap:
 
-- **Same bootstrap, different models:** Every agent — from cheap bulk scanners to frontier judges — reads the same AGENTS.md. The bootstrap defines their role, not their model card.
-- **Cross-runtime coordination:** L2 agents in OpenCode Go can summon L3 escalation agents in the same runtime, or signal-and-stop for L4 frontier review across runtimes.
-- **Sub-agent delegation:** L2 planners decompose tasks and fan out to L1 workers, then review and merge results.
+- **L2 (DeepSeek V4-Pro via OpenCode Go)** is the daily default for coding, n8n, shell, repo work
+- **L1 (V4-Flash, Gemini Flash)** handles bulk extraction, scans, mechanical transforms
+- **L3 (Kimi K2.7, Qwen3.7-Max)** takes over on signaled escalation within the same runtime
+- **L4 (Codex/GPT-5.5, Opus 4.8)** is reserved for architecture, security, final judgment — cross-runtime
 
-### Layer 3: Persistent Memory (Knowledge Vault)
+Agents don't chat with each other. Coordination happens through the bootstrap rules, handoff templates, and the shared vault state.
 
-A Git-versioned Markdown knowledge base structured for targeted retrieval:
+### Persistent Memory
 
-- **Requirements-First Routing:** Agents must read the index first, then pull only the specific note needed — no preloading entire trees.
-- **Security Isolation:** Credentials and private runtime configuration stay outside the sync loop. Only non-sensitive pointers are documented.
-- **Multi-Device Consistency:** The same knowledge base syncs across Windows desktop, Fedora laptop, and cloud VPS via automated Git pipelines.
+A Git-versioned Markdown knowledge base organized for targeted retrieval. Agents read the index first, then pull only the specific notes needed — no preloading full trees. Credentials stay outside the sync loop.
 
-### Layer 4: Access Layer (MCP + Git Sync)
+### Access Layer
 
-- **Local MCP Endpoints:** Local agents query the vault with near-zero latency.
-- **Remote MCP (Oracle VPS):** Cloud agents and n8n workflows retrieve context through authenticated, restricted endpoints.
-- **Event-Driven Auto-Sync:** A lightweight daemon monitors vault changes, debounces saves, commits, and pushes to a private Git remote.
-- **Protected Writes:** Write operations are serialized, Git-backed, with conservative conflict handling.
-
----
-
-## What This Enables (Beyond Memory)
-
-| Capability | Without This Architecture | With It |
-|---|---|---|
-| Agent starts new session | Manual re-briefing, context drift | Reads bootstrap → knows role, rules, limits instantly |
-| Task is too complex for current tier | Blind retry, silent failure | Two-failure rule triggers automatic escalation |
-| Task is trivial/bulk | Frontier model wasted on it | Automatic de-escalation to L1 bulk agent |
-| Work done by sub-agent | Context lost, results unverified | Returns via handoff template: result, files touched, verification, risks |
-| New device or agent joins | Manual setup, inconsistent config | Clones vault → reads AGENTS.md → fully operational |
-| Cost control | No visibility, frontier overuse | Quality-cost governor baked into every agent's decision loop |
+- **Local MCP:** agents on the same machine query the vault directly
+- **Remote MCP (Oracle VPS):** cloud agents and n8n workflows retrieve context through authenticated endpoints
+- **Git auto-sync:** a lightweight daemon monitors changes, commits, and pushes to a private remote
 
 ---
 
-## Core Outcomes
+## What It Looks Like In Practice
 
-- **Autonomous Multi-Agent Coordination:** Agents self-route based on task risk and complexity. No human dispatcher needed for routine work.
-- **Zero Bootstrap Waste:** A new agent session costs one file read (AGENTS.md) plus task-specific notes only. No full-context dumps.
-- **Cross-Provider Antifragility:** The architecture is provider-agnostic. If a model vendor goes down, agents switch to the next available tier.
-- **Verifiable Quality Gates:** No agent can declare work "done" without showing verification (test pass, build green, diff reviewed).
+| Situation | Behavior |
+|---|---|
+| New agent session starts | Reads AGENTS.md → knows its tier, rules, and limits immediately |
+| Task exceeds current tier | Two-failure rule triggers escalation to next tier up |
+| Task is trivial/bulk | Automatic de-escalation to L1, no frontier tokens burned |
+| Sub-agent completes work | Returns via handoff template: result, files touched, verification status, open risks |
+| New device joins | Clones vault → reads bootstrap → operational |
 
 ---
 
-## What's Next: OpsVault
+## Outcomes
 
-This architecture is being extracted into a public reference project (**OpsVault**) with reusable templates, sanitization rules, bootstrap scripts, and a safe reference architecture.
+- **Shared operating doctrine across all agents and devices.** No per-agent configuration drift.
+- **Token-efficient bootstrapping.** A new session costs one compact file read plus task-specific notes, not full-context dumps.
+- **Provider-agnostic.** If a model vendor has an outage, agents route to the next available tier without reconfiguration.
+- **Verification gates.** No agent declares work done without showing evidence (tests passing, build green, diff reviewed).
 
-The private implementation — production topology, agent identities, credentials, workflow exports, and personal vault content — remains private and can be discussed in live walkthroughs with sanitized examples.
+---
 
-This keeps the portfolio value visible without publishing the private operating system.
+## Sanitization
+
+This case study describes the architecture and its operational behavior. It does not expose the private vault content, agent identities, production topology, credentials, or workflow internals. Live walkthroughs with sanitized examples are available on request.
