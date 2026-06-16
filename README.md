@@ -1,6 +1,6 @@
 # Matteo Passeri - Operations Systems Portfolio
 
-Sanitized case studies for operations systems, CRM workflows, ERP transition, quote-to-cash visibility, n8n automation, and AI-assisted implementation.
+Sanitized case studies for operations systems, CRM workflows, ERP transition, quote-to-cash visibility, n8n automation, AI agent orchestration (MCP), and AI-assisted implementation.
 
 I build practical operating systems for small teams: lead intake, qualification workflows, quoting, pipeline visibility, reporting, alerting, SOPs, and handoff documentation.
 
