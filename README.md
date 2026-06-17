@@ -18,6 +18,7 @@ Il profilo è tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 
 | Signal | Where to look | What it proves |
 | --- | --- | --- |
+| 65-node AI workflow orchestration | [n8n Lead Qualifier demo](https://github.com/matteopasseri407/n8n-demo) | End-to-end lead intake, LLM scoring, CRM updates, alerts, booking lifecycle, fallback handling, and recovery |
 | Sanitized operations systems | Case studies in this repository | System thinking, process ownership, handoff design, safe public documentation |
 | Public technical source | [HP EliteBook Ryzen Tuning](https://github.com/matteopasseri407/hp-elitebook-845-g8-ryzen-tuning) | Linux/systemd/udev automation, CI, releases, packaging discipline |
 | Multi-agent orchestration | OpsVault case study | AI-agent orchestration, tiered routing, escalation protocols, Git-backed command layer and persistent memory |
@@ -39,6 +40,12 @@ Il profilo è tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 - Documentation, SOPs, and operational handoff
 
 ## Selected Systems
+
+### n8n Lead Qualifier - 65-Node AI Workflow
+
+A self-hosted n8n workflow for B2B lead intake and qualification. It combines deterministic pre-filtering, duplicate detection, homepage/social enrichment, Groq LLM scoring, Notion CRM updates, Calendly booking/cancellation handling, Telegram alerts, fallback paths, and abandoned-form recovery.
+
+Public demo: [matteopasseri407/n8n-demo](https://github.com/matteopasseri407/n8n-demo)
 
 ### Multi-Agent Orchestration Architecture (OpsVault)
 
