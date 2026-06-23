@@ -45,7 +45,9 @@ graph TD
     Bootstrap -->|Governa| Agents
     Agents -->|Legge/scrive| Memory
     Memory -->|Sincronizzato via| Git
+    Notes -->|Indicizzate in| Semantic["Ricerca semantica ibrida<br/>(embeddings + BM25 + RRF)"]
     Agents -->|Interroga via| MCP
+    MCP -->|Retrieval ibrido| Semantic
     L2 -->|Delega| L1
     L2 -->|Escala| L3
     L2 -->|Escala| L4
@@ -75,6 +77,17 @@ Gli agenti non chattano tra loro. Il coordinamento avviene tramite le regole del
 ### Memoria Persistente
 
 Base di conoscenza Markdown versionata con Git, organizzata per retrieval mirato. Gli agenti leggono prima l'indice, poi recuperano solo le note necessarie — nessun precaricamento di alberi completi. Le credenziali restano fuori dal ciclo di sync.
+
+### Layer di Retrieval Semantico (RAG ibrido)
+
+Il retrieval mirato poggia su un **layer di ricerca ibrida** self-hosted sopra il vault — la base di retrieval per risposte agentiche in stile RAG, ancorate alle fonti. Il lavoro qui non è stato scrivere l'algoritmo, ma le **decisioni di design, integrazione e validazione** sotto vincoli reali: niente API di embedding esterne (costo ricorrente, dati del vault che lasciano l'host) e niente GPU. L'approccio scelto gira interamente su CPU e combina:
+
+- **Embedding statici** (multilingue, solo CPU) per il match per significato
+- **BM25** lessicale su chunk arricchiti col contesto
+- **Reciprocal-rank fusion** dei due segnali, più un **boost su titolo/alias** così la nota canonica su un tema batte quelle che lo citano soltanto
+- **Espansione bilingue della query (IT/EN)** così le domande in linguaggio naturale raggiungono note tecniche scritte in inglese
+
+Il percorso conta quanto il risultato: un modello transformer più pesante è stato escluso (troppo lento senza GPU), una API di embedding esterna è stata esclusa (costo ed esposizione dati), e quando la qualità semantica grezza si è appiattita la risposta è stata aggiungere segnale lessicale — non pagare un modello più grosso. Ogni scelta è stata validata su un set di query reale e misurata, non assunta. L'implementazione è AI-assisted; l'architettura, i trade-off e la verifica sono stati il lavoro decisivo. Il layer è servito agli agenti tramite gli stessi endpoint MCP, senza che alcun contenuto del vault lasci l'host.
 
 ### Access Layer
 

@@ -45,7 +45,9 @@ graph TD
     Bootstrap -->|Governs| Agents
     Agents -->|Read/write| Memory
     Memory -->|Synced via| Git
+    Notes -->|Indexed into| Semantic["Hybrid semantic search<br/>(embeddings + BM25 + RRF)"]
     Agents -->|Query via| MCP
+    MCP -->|Hybrid retrieval| Semantic
     L2 -->|Delegates| L1
     L2 -->|Escalates| L3
     L2 -->|Escalates| L4
@@ -75,6 +77,17 @@ Agents don't chat with each other. Coordination happens through the bootstrap ru
 ### Persistent Memory
 
 A Git-versioned Markdown knowledge base organized for targeted retrieval. Agents read the index first, then pull only the specific notes needed — no preloading full trees. Credentials stay outside the sync loop.
+
+### Semantic Retrieval Layer (Hybrid RAG)
+
+Targeted retrieval is backed by a self-hosted **hybrid search layer** over the vault — the retrieval foundation for RAG-style, source-grounded agent answers. The work here was not writing the algorithm; it was the **design, integration, and validation decisions** under real constraints: no external embeddings API (recurring cost, vault data leaving the host) and no GPU. The chosen approach runs entirely on CPU and combines:
+
+- **Static embeddings** (multilingual, CPU-only) for meaning-based matching
+- **BM25** lexical search over context-enriched chunks
+- **Reciprocal-rank fusion** of both signals, plus a **title/alias boost** so the canonical note on a topic outranks notes that merely mention it
+- **Bilingual query expansion (IT/EN)** so plain-language questions reach technical notes written in English
+
+The path mattered as much as the result: a heavier transformer model was ruled out (too slow without a GPU), an external embedding API was ruled out (cost and data exposure), and when raw semantic quality plateaued the answer was to add lexical signal — not to pay for a bigger model. Every choice was validated against a real query set and measured, not assumed. Implementation was AI-assisted; the architecture, trade-offs, and verification were the deciding work. The layer is served to agents through the same MCP endpoints, with no vault content leaving the host.
 
 ### Access Layer
 

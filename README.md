@@ -30,6 +30,7 @@ Il profilo è tecnico-operativo: operations, ERP/CRM, workflow automation, siste
 - Model Context Protocol (MCP) & Cross-Agent Context Engineering
 - AI Agent Tiering & Quality-Cost Governance
 - Git-backed, event-driven Personal Knowledge Management (PKM) systems
+- Hybrid semantic retrieval (RAG): self-hosted embeddings + BM25 + rank fusion over a private knowledge base, CPU-only and privacy-preserving
 - Lead lifecycle management: intake, qualification, scoring, routing
 - CRM-style handoff: structured fields, alerts, status tracking, fallback paths
 - Quote-to-cash visibility: clients, quotes, work logs, delivery, P&L
@@ -49,7 +50,7 @@ Public demo: [matteopasseri407/n8n-demo](https://github.com/matteopasseri407/n8n
 
 ### Multi-Agent Orchestration Architecture (OpsVault)
 
-A working architecture that coordinates AI agents across capability tiers (L0-L4), runtime environments, and devices. A single Git-versioned bootstrap governs every agent: routing rules, escalation triggers, delegation templates, and quality-cost guardrails. MCP endpoints expose the knowledge base with tiered access controls. In daily use — not a blueprint, but the operating layer through which all AI-assisted work flows.
+A working architecture that coordinates AI agents across capability tiers (L0-L4), runtime environments, and devices. A single Git-versioned bootstrap governs every agent: routing rules, escalation triggers, delegation templates, and quality-cost guardrails. MCP endpoints expose the knowledge base with tiered access controls. It now includes a self-hosted hybrid semantic retrieval layer (RAG): CPU-only embeddings + BM25 + rank fusion, served to agents through MCP. In daily use — not a blueprint, but the operating layer through which all AI-assisted work flows.
 
 Case study: [English Version](case-studies/agentic-knowledge-vault-mcp.md) | [Versione Italiana](case-studies/agentic-knowledge-vault-mcp-it.md)
 
