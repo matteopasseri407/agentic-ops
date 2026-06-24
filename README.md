@@ -80,6 +80,12 @@ An Oracle Cloud automation layer running active workflows for lead qualification
 
 Case study: [case-studies/self-hosted-n8n-automation-layer.md](case-studies/self-hosted-n8n-automation-layer.md)
 
+### Calendar → Vault Context Sync
+
+An n8n workflow that keeps the AI agents' working memory aligned with my real calendar. It reconciles upcoming events into a single regenerated agenda note in the knowledge base, writing through the vault's authenticated MCP contract (read → hash-guarded update) with no LLM in the hot path. Demonstrates declarative desired-state sync, optimistic concurrency, and reuse of a hardened write path instead of a bespoke service.
+
+Case study: [case-studies/calendar-vault-context-sync.md](case-studies/calendar-vault-context-sync.md)
+
 ### 3D Services Commercial Website
 
 A public commercial website for a 3D scanning and design workflow, built to connect service presentation to structured quote intake and the internal operating system.
