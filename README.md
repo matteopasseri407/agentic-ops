@@ -84,7 +84,7 @@ Case study: [case-studies/self-hosted-n8n-automation-layer.md](case-studies/self
 
 An n8n workflow that keeps the AI agents' working memory aligned with my real calendar. It reconciles upcoming events into a single regenerated agenda note in the knowledge base, writing through the vault's authenticated MCP contract (read → hash-guarded update) with no LLM in the hot path. Demonstrates declarative desired-state sync, optimistic concurrency, and reuse of a hardened write path instead of a bespoke service.
 
-Case study: [case-studies/calendar-vault-context-sync.md](case-studies/calendar-vault-context-sync.md)
+Case study: [case-studies/calendar-vault-context-sync.md](case-studies/calendar-vault-context-sync.md) · Demo repo: [n8n-calendar-vault-sync](https://github.com/matteopasseri407/n8n-calendar-vault-sync)
 
 ### 3D Services Commercial Website
 

@@ -4,6 +4,8 @@
 
 > This case study is intentionally sanitized. No source code, workflow exports, infrastructure addresses, endpoints, tokens, IDs, or personal data are reproduced — only the architecture, the decisions, and the outcome. The operational workflow remains private.
 
+> Standalone demo repo (diagram, core logic, walkthrough): **[n8n-calendar-vault-sync](https://github.com/matteopasseri407/n8n-calendar-vault-sync)**.
+
 ---
 
 ## Context
