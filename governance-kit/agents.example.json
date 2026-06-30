@@ -1,0 +1,26 @@
+{
+  "instructions_file": "AGENTS.md",
+  "required_env": ["MEMORY_TOKEN"],
+  "agents": [
+    {
+      "name": "claude",
+      "config": "~/.claude.json",
+      "format": "json",
+      "mcp_path": "mcpServers",
+      "expected_mcp": ["memory", "search", "browser"]
+    },
+    {
+      "name": "codex",
+      "config": "~/.codex/config.toml",
+      "format": "toml",
+      "expected_mcp": ["memory", "search", "browser"]
+    },
+    {
+      "name": "opencode",
+      "config": "~/.config/opencode/opencode.json",
+      "format": "json",
+      "mcp_path": "mcp",
+      "expected_mcp": ["memory", "search", "browser"]
+    }
+  ]
+}
