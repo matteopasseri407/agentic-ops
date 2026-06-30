@@ -1,4 +1,4 @@
-# Agentic ops architecture
+# The Vault 2.0 project
 
 I'm not a pure software engineer, and I don't pitch myself as one. What I do well
 is turn messy operations into systems that actually run. Lately that means getting
